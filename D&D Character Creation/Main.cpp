@@ -35,6 +35,13 @@ int main(){
             characters.push_back(createCharacter());
             continue;
         }
+
+        if(strcmp(Word, "ViewCharacter") == 0){
+            for(int i = 0; i < characters.size(); i++){
+                characters[i].printStats();
+                cout << endl;
+            }
+        }
     }
     return 1;
 }

@@ -12,10 +12,7 @@ int nextInstruction(char *Word){
 
     if (strcmp(Word, "Stop")==0) return 1;
     if (strcmp(Word, "CreateCharacter")==0) return 1;
-
-    if (strcmp(Word, "SingleSource")==0){
-        return 1;
-    }
+    if (strcmp(Word, "ViewCharacter")==0) return 1;
 
     if (strcmp(Word, "PrintPath")==0){
             return 1;

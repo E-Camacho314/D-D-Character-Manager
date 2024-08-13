@@ -21,11 +21,22 @@ vector<string> atttributes {"Strength", "Constitution", "Dexterity", "Intelligen
 
 class Player{
     public:
-        int strength, constitution, dexterity, intelligence, wisdom, charisma;
-        Class Class;
+        int strength, constitution, dexterity, intelligence, wisdom, charisma, strmod, dexmod, intmod, chamod, wismod, conmod;
         background background;
         race race;
         string name;
+        Class class1;
+        int hitpoints;
+        void printStats(){
+            cout << "Name: " << name << endl;
+            cout << "Class: " << class1.name << endl;
+            cout << "Strength: " << strength << endl;
+            cout << "Constitution: " << constitution << endl;
+            cout << "Dexterity: " << dexterity << endl;
+            cout << "Intelligence: " << intelligence << endl;
+            cout << "Wisdom: " << wisdom << endl;
+            cout << "Charisma: " << charisma << endl;
+        }       
 };
 
 int numChecker(vector<int> stats){
@@ -60,60 +71,6 @@ vector<int> attributeGenerate(){
     return stats;
 }
 
-Class classChoose(string choice){
-    choice[0] = toupper(choice[0]);
-    if(choice == "Warlock"){
-        Warlock class1;
-        return class1;
-    }
-    else if(choice == "Bard"){
-        Bard class1;
-        return class1;
-    }
-    else if(choice == "Wizard"){
-        Wizard class1;
-        return class1;
-    }
-    else if(choice == "Sorceror"){
-        Sorceror class1;
-        return class1;
-    }
-    else if(choice == "Barbarian"){
-        Barbarian class1;
-        return class1;
-    }
-    else if(choice == "Paladin"){
-        Paladin class1;
-        return class1;
-    }
-    else if(choice == "Druid"){
-        Druid class1;
-        return class1;
-    }
-    else if(choice == "Ranger"){
-        Ranger class1;
-        return class1;
-    }
-    else if(choice == "Rogue"){
-        Rogue class1;
-        return class1;
-    }
-    else if(choice == "Cleric"){
-        Cleric class1;
-        return class1;
-    }
-    else if(choice == "Monk"){
-        Monk class1;
-        return class1;
-    }
-    else if(choice == "Fighter"){
-        Fighter class1;
-        return class1;
-    }
-    Class news;
-    return news;
-}
-
 Player createCharacter(){
     Player character;
     vector<int> stats;
@@ -144,14 +101,14 @@ Player createCharacter(){
         while(namecheck == false){
             cin >> temp;
             if(find(classes.begin(), classes.end(), temp) != classes.end()){
-                character.Class = classChoose(temp);
+                character.class1.name = temp;
+                character.class1.classInfo();
                 namecheck = true;
             }
             else{
                 cout << "Invalid input. Please try again. ";
             }
         }
-        cout << "Class: " << character.Class.name << "\n" << endl;
         cout << "Time for your attributes!" << endl;
         stats = attributeGenerate();
         for(int i = 0; i < 6; i++){
@@ -172,7 +129,91 @@ Player createCharacter(){
         for(int i = 0; i < stats.size(); i++){
             cout << stats[i] << endl;
         }
+        cout << "What shall be your Intelligence stat? ";
+        character.intelligence = numChecker(stats);
+        stats.erase(remove(stats.begin(), stats.end(), character.intelligence));
+        cout << "Intelligence: " << character.intelligence << endl;
+        for(int i = 0; i < stats.size(); i++){
+            cout << stats[i] << endl;
+        }
+        cout << "What shall be your Charisma stat? ";
+        character.charisma = numChecker(stats);
+        stats.erase(remove(stats.begin(), stats.end(), character.charisma));
+        cout << "Charisma: " << character.charisma << endl;
+        for(int i = 0; i < stats.size(); i++){
+            cout << stats[i] << endl;
+        }
+        cout << "What shall be your Dexterity stat? ";
+        character.dexterity = numChecker(stats);
+        stats.erase(remove(stats.begin(), stats.end(), character.dexterity));
+        cout << "Dexterity: " << character.dexterity << endl;
+        for(int i = 0; i < stats.size(); i++){
+            cout << stats[i] << endl;
+        }
+        cout << "What shall be your Wisdom stat? ";
+        character.wisdom = numChecker(stats);
+        stats.erase(remove(stats.begin(), stats.end(), character.wisdom));
+        cout << "Wisdom: " << character.wisdom << endl;
+        for(int i = 0; i < stats.size(); i++){
+            cout << stats[i] << endl;
+        }
         done = true;
     }
     return character;
 }
+
+
+        /*Class classChoose(string choice){
+            choice[0] = toupper(choice[0]);
+            if(choice == "Warlock"){
+                Warlock class1;
+                class1.classInfo();
+                return class1;
+            }
+            else if(choice == "Bard"){
+                Bard class1;
+                return class1;
+            }
+            else if(choice == "Wizard"){
+                Wizard class1;
+                return class1;
+            }
+            else if(choice == "Sorceror"){
+                Sorceror class1;
+                return class1;
+            }
+            else if(choice == "Barbarian"){
+                Barbarian class1;
+                return class1;
+            }
+            else if(choice == "Paladin"){
+                Paladin class1;
+                return class1;
+            }
+            else if(choice == "Druid"){
+                Druid class1;
+                return class1;
+            }
+            else if(choice == "Ranger"){
+                Ranger class1;
+                return class1;
+            }
+            else if(choice == "Rogue"){
+                Rogue class1;
+                return class1;
+            }
+            else if(choice == "Cleric"){
+                Cleric class1;
+                return class1;
+            }
+            else if(choice == "Monk"){
+                Monk class1;
+                return class1;
+            }
+            else if(choice == "Fighter"){
+                Fighter class1;
+                return class1;
+            }
+            Class news;
+            return news;
+        }*/
