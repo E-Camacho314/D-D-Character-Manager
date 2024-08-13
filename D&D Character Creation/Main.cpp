@@ -11,6 +11,30 @@ using namespace std;
 
 int main(){
     vector<Player> characters;
-    characters.push_back(createCharacter());
+    char Word[100];
+    int returnV;
+    cout << "Welcome to Dungeons and Dragons Character Manager!" << endl;
+    while (1){
+        cout << "\nOptions: " << endl;
+        cout << "CreateCharacter" << endl;
+        cout << "ViewCharacter" << endl;
+        cout << "Stop" << endl;
+        cout << "Please Choose an Option: ";
+        returnV = nextInstruction(Word);
+
+        if(returnV == 0){
+            cout << "Warning: Invalid Instruction\n";
+            continue;
+        }
+
+        if(strcmp(Word,"Stop") == 0){
+            return 0;
+        }
+
+        if(strcmp(Word,"CreateCharacter") == 0){
+            characters.push_back(createCharacter());
+            continue;
+        }
+    }
     return 1;
 }
