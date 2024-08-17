@@ -14,7 +14,7 @@ int nextInstruction(char *Word){
     if (strcmp(Word, "CreateCharacter")==0) return 1;
     if (strcmp(Word, "ViewCharacter")==0) return 1;
 
-    if (strcmp(Word, "PrintPath")==0){
+    if (strcmp(Word, "LevelUp")==0){
             return 1;
     }
 

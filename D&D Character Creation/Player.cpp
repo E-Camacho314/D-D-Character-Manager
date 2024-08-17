@@ -12,24 +12,30 @@
 #include "Background.cpp"
 using namespace std;
 
+//all available classes for use
 vector<string> classes {"warlock", "Warlock", "wizard", "Wizard", "sorceror", "Sorceror",
                 "barbarian", "Barbarian", "paladin", "Paladin", "druid", "Druid", "ranger", "Ranger", "fighter", "Fighter",
                 "rogue", "Rogue", "cleric", "Cleric", "monk", "Monk", "bard", "Bard"};
 
+//all attributes for comparison uses
 vector<string> atttributes {"Strength", "Constitution", "Dexterity", "Intelligence", "Wisdom", "Charisma"};
 
 
 class Player{
     public:
+        // all attributes and modifiers
         int strength, constitution, dexterity, intelligence, wisdom, charisma, strmod, dexmod, intmod, chamod, wismod, conmod;
         background background;
         race race;
         string name;
         Class class1;
+        int level;
         int hitpoints;
+        
+        //print all available stats of the character
         void printStats(){
             cout << "Name: " << name << endl;
-            cout << "Class: " << class1.name << endl;
+            class1.classInfo();
             cout << "Strength: " << strength << endl;
             cout << "Constitution: " << constitution << endl;
             cout << "Dexterity: " << dexterity << endl;
@@ -39,6 +45,7 @@ class Player{
         }       
 };
 
+//checks if a user given input is in the given vector. Repeats until a valid answer is given
 int numChecker(vector<int> stats){
     int stat;
     bool checker = false;
@@ -54,6 +61,7 @@ int numChecker(vector<int> stats){
     return stat;
 }
 
+//generates 6 random numbers by rolling 4 "die" dropping the lowest number and adding the rest. Used for attribute generation
 vector<int> attributeGenerate(){
     random_device rand;  
     mt19937 gen(rand());  
@@ -71,14 +79,18 @@ vector<int> attributeGenerate(){
     return stats;
 }
 
+//Character creation method
 Player createCharacter(){
     Player character;
     vector<int> stats;
     string temp;
+    character.level = 1;
     cout << "\nWelcome to Dungeons and Dragons Character Creation!" << endl;
     char check;
     bool namecheck = false;
     bool done = false;
+    //Set character name
+    //While bool is false, the loop repeats until user is satisfied with name
     while(done == false){
         while(namecheck == false){
             cout << "Please name your character: ";
@@ -91,6 +103,7 @@ Player createCharacter(){
             }
         }
         character.name = temp;
+        //Set character class
         cout << "List of Classes:" << endl;
         for(int i = 1; i < classes.size(); i++){
             cout << classes[i] << endl;
@@ -98,10 +111,13 @@ Player createCharacter(){
         }
         cout << "What class will your character be? ";
         namecheck = false;
+        // loop until valid class is given by user
+        // automatically sets class to level 1
         while(namecheck == false){
             cin >> temp;
             if(find(classes.begin(), classes.end(), temp) != classes.end()){
                 character.class1.name = temp;
+                character.class1.level = 1;
                 character.class1.classInfo();
                 namecheck = true;
             }
@@ -109,12 +125,15 @@ Player createCharacter(){
                 cout << "Invalid input. Please try again. ";
             }
         }
+        //Set character attributes
         cout << "Time for your attributes!" << endl;
         stats = attributeGenerate();
         for(int i = 0; i < 6; i++){
             cout << stats[i] << endl;
         }
         cout << "These are the generated numbers for your stats" << endl;
+        //takes in valid user input and sets it to the corresponding stat variable
+        //value is then removed from the generated list 
         cout << "What shall be your Strength stat? ";
         character.strength = numChecker(stats);
         stats.erase(remove(stats.begin(), stats.end(), character.strength));
@@ -157,6 +176,7 @@ Player createCharacter(){
         for(int i = 0; i < stats.size(); i++){
             cout << stats[i] << endl;
         }
+        //ends character creation loop
         done = true;
     }
     return character;

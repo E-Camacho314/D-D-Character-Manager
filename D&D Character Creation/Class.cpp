@@ -6,23 +6,45 @@
 #include <iostream>
 using namespace std;
 
+// Class object to define character class
 class Class {
     public:
+    // name of class
     string name;
+    // class level
+    int level;
+    // whether or not class can cast spells
     bool spellcasting;
+    // spellcasting attribute
     string spellAbility;
+    // available spells
     vector<spell> spellList;
     vector<string> languages;
+    // saving throw attributes
     vector<string> savingThrows;
-    vector<string> proficiencies;
-
+    // proficiencies
+    vector<string> armor_proficiencies;
+    vector<string> weapon_proficiencies;
+    vector<string> tool_proficiencies;
+    // WARLOCK ONLY : otherworldly patron
+    string patron;
+    
+    //prints out information on the class
     void classInfo(){
         cout << "Class: " << name << endl;
+        cout << "Class Level: " << level << endl;
     }
+
+    //updates all class infor based on user choice of class
     void update(){
         if(name == "Warlock"){
             spellcasting = true;
             spellAbility = "Charisma";
+            armor_proficiencies.push_back("light");
+            weapon_proficiencies.push_back("simple");
+            savingThrows.push_back("Wisdom");
+            savingThrows.push_back("Charisma");
+
         }
         else if(name == "Bard"){  
             

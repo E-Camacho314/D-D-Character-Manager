@@ -9,8 +9,11 @@
 #include "Player.cpp"
 using namespace std;
 
+// Main Menu: Allows players to choose to view, create, or level up character or end program
 int main(){
+    // all characters are held within array for easier access
     vector<Player> characters;
+    // Word used for next instruction method
     char Word[100];
     int returnV;
     cout << "Welcome to Dungeons and Dragons Character Manager!" << endl;
